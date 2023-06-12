@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Age calculator app</title>
+
+  
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+
+    @font-face{
+        font-family: poppins;
+        src: url(Poppins-Regular.ttf);
+      }
+
+      
+    @font-face{
+        font-family: poppinsextrabolditalic;
+        src: url(Poppins-ExtraBoldItalic.ttf);
+      }
+
+      @font-face{
+        font-family: poppinsbold;
+        src: url(Poppins-Bold.ttf);
+      }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    .input-section {
+      text-align: center;
+      display: flex;
+      justify-content: flex-start;
+      width: 80%;
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      font-size: 15px;
+      margin-right: 25px;
+      flex:1;
+    }
+
+    .input-label {
+      font-size: 32px;
+      border-style: solid;
+      border-width: 2px;
+      border-color: rgb(231, 230, 230);
+      width: 100px;
+      height: fit-content;
+      text-align: left;
+    }
+
+    .input-label-text {
+      font-weight: 800;
+      color: rgb(95, 95, 95);
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-family: poppinsbold;
+    }
+
+    .input-error{
+      color: red;
+      display: none;
+    }
+
+    .result-section {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      left: 50%;
+      flex-shrink: 3;
+      font-family: poppinsextrabolditalic;
+    }
+
+    .result-text {
+      font-size: 100px;
+      margin-left: 9%;
+      font-weight: 1000;
+      font-style: italic;
+      height: min-content;
+    }
+
+  
+
+    .result-display-colour{
+      color: blueviolet;
+    }
+
+    .result-display-colour:hover{
+    color: cyan;
+    transition: 0.2s;
+    }
+
+    .result-display-black{
+      color: black;
+    }
+
+    .result-display-black:hover{
+      color: green;
+    }
+
+    .white-box {
+      display: flex;
+      flex-direction: column;
+      max-width: 800px;
+      width: 800px;
+      min-height: 500px;
+      height: 500px;
+      background-color: hsl(0, 0%, 100%);
+      justify-content: space-around;
+      align-items: center;
+      margin: auto auto;
+      border-radius: 5%;
+      border-bottom-right-radius: 30%;
+      padding-bottom: 6%;
+      padding-top: 6%;
+      margin-top: 8%;
+    }
+
+    .horizontal-line {
+      width: 82%;
+      border-color: rgb(158, 151, 151);
+      opacity: 0.1;
+      z-index: 1;
+      position: relative;
+      bottom: 100%;
+    }
+
+    .icon-position {
+      width: min-content;
+      margin-left: 80%;
+      position: relative;
+      z-index: 2;
+
+    }
+
+    .circle-for-result {
+      background-color: hsl(259, 100%, 65%);
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .circle-for-result:hover{
+      background-color: black;
+      transition: 0.2s;
+    }
+    
+
+  </style>
+</head>
+
+<body style="background-color: lightgray; font-family: poppins;">
+  <div id="OverallGroup">
+    <div Id="MainWhiteBox" class="white-box">
+      <div class="input-section">
+
+        <div class="input-field">
+          <div class="input-label-text">D A Y</div>
+          <input class="input-label" type="number" min="1" max="31" placeholder="DD" id="day-input">
+          <div class = "input-error"> Invalid day</div>
+        </div>
+
+        <div class="input-field">
+          <div class="input-label-text">M O N T H</div>
+          <input class="input-label" type="number" min="1" max="12" placeholder="MM" id="month-input">
+          <div class = "input-error"> Invalid month</div>
+        </div>
+
+        <div class="input-field">
+          <div class="input-label-text">Y E A R</div>
+          <input class="input-label" type="number" min="0" placeholder="YYYY" id="year-input">
+          <div class = "input-error"> Invalid year</div>
+        </div>
+      </div>
+
+
+      <div style="width: 100%; ">
+
+        <div class="icon-position">
+          <div id="button-calculate" class="circle-for-result">
+            <img src="assets\images\icon-arrow.svg">
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="result-section">
+        <div class="result-text">
+          <p class = "result-display-black"style="margin: 0;">
+            <span id="result-year" class = "result-display-colour">
+              --
+            </span> 
+            years
+          </p>
+
+        </div>
+
+        <div class="result-text">
+          <p class = "result-display-black" style="margin: 0;">
+            <span id="result-month" class = "result-display-colour">
+              --
+            </span>
+             months
+          </p>
+        </div>
+
+        <div class="result-text">
+          <p class = "result-display-black" style="margin: 0;">
+            <span id="result-day" class = "result-display-colour">
+              --
+            </span> 
+            days
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="#">Shirahn Singh</a>.
+    </div>
+
+
+
+  </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+  var button = document.getElementById("button-calculate");
+  button.addEventListener("click", calculateAge);
+
+  function calculateAge() {
+    var currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentDay = currentDate.getDate();
+
+    var inputYear = parseFloat(document.getElementById("year-input").value);
+    var inputMonth = parseFloat(document.getElementById("month-input").value);
+    var inputDay = parseFloat(document.getElementById("day-input").value);
+
+    const dayErrorMessage = document.querySelector('.input-field:nth-child(1) .input-error');
+    const monthErrorMessage = document.querySelector('.input-field:nth-child(2) .input-error');
+    const yearErrorMessage = document.querySelector('.input-field:nth-child(3) .input-error');
+ var inputDate = new Date(inputYear,inputMonth,inputDay);
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var months31Days = [0, 2, 4, 6, 7, 9, 11];
+    var months30Days = [3, 5, 8, 10];
+    var maxDays = 0;
+    var errorFlag = false;
+    var errorMessage = "";
+
+    if (inputYear % 4 == 0) {
+      daysInMonth[1] = 29;
+    }
+    
+    if(inputDate>currentDate)
+    {
+      errorMessage += "Cannot input future date.\n";
+      errorFlag=true;
+    }
+    
+      if (inputYear < 0 || isNaN(inputYear) || inputYear > currentYear) {
+        errorFlag=true;
+        yearErrorMessage.style.display = 'block';
+      }
+      else{
+        yearErrorMessage.style.display = 'none';
+      }
+    
+      if (inputMonth < 0 || isNaN(inputMonth)|| inputMonth>12) {
+        errorFlag=true;
+        monthErrorMessage.style.display = 'block';
+      }
+      else{
+        monthErrorMessage.style.display = 'none';
+      }
+     maxDays = daysInMonth[inputMonth-1];
+    
+      if (inputDay < 0 || isNaN(inputDay)|| inputDay>maxDays) {
+        errorFlag=true;
+        dayErrorMessage.style.display = 'block';
+      }
+      else{
+        dayErrorMessage.style.display = 'none';
+      }
+
+      if(errorFlag)
+      {
+          var YearDiffInDays = "--";
+          var MonthDiffInDays = "--";
+          var DayDiff = "--";
+          return
+      }
+      else{
+          var YearDiffInDays = (currentYear - inputYear);
+          var MonthDiffInDays = Math.abs((currentMonth - inputMonth));
+          var DayDiff = Math.abs(currentDay - inputDay);
+      }
+    document.getElementById("result-year").textContent = YearDiffInDays;
+    document.getElementById("result-month").textContent = MonthDiffInDays
+    document.getElementById("result-day").textContent = DayDiff;
+
+  }
+</script>
